@@ -14,74 +14,19 @@
 \begin{document}
 
 \begin{center}
-    \Large\textbf{Deliverable 2}
+    \Large\textbf{Deliverable 3}
 \end{center}
 \vspace{0.5em}
 \hrule
 \vspace{1em}
 
 \noindent
-\textbf{Title:} Final Project - Deliverable 2 \\
-\textbf{Date:} October 10\textsuperscript{th}, 2024 \\
+\textbf{Title:} Final Project - Deliverable 3 \\
+\textbf{Date:} October 18\textsuperscript{th}, 2024 \\
 \textbf{Student participating: } Homawoo, Elorm. K., Garcia, Jose. C., Vanderhoff, Will. R. \\
 \textbf{User IDs:}  ehoma2, jgarc435, wvand,\\
 \vspace{1em}
 \hrule
-
-\section*{7. Brainstorming}
-\textit{Objective:} Identify the elements needed for the database.
-
-To successfully design and implement a system that tracks course performance and allows for the addition of assignments or exams dynamically, we need to identify all the necessary components and features. Here’s a comprehensive list of elements and considerations that will help build this system.
-
-\textbf{Entity Sets:}
-
-\begin{itemize}
-
-    \item \textbf{Instructor:} with attributes \textit{(\underline{ID}, name, email, department)}.
-    \begin{itemize}
-        \item Relation: Relates and assigns domain over a course's administration. 
-        \item Error Handling: Professors must have a login in order to administer feedback to assigned courses. A professor who can assign feedback must have a tuple in Course. Additionally, professor must belong to a department that exists in the department table. 
-    \end{itemize}
-    
-    \item \textbf{Student:} with attributes \textit{(\underline{ID}, name, email, GPA)}.
-    \begin{itemize}
-        \item Relation: Student will have assigned tuples in various grading relations (still being fleshed out for optimum design). 
-        \item Error Handling: GPA is to be calculated from all student outcomes from assignments, exams, and overall reported grades in other relations such as Assignment, Exam, and Cutoff. 
-    \end{itemize}
-    
-    \item \textbf{Course:} with attributes \textit{(\underline{course\_id}, \underline{instructor\_id}, title, section, semester, year, enrollment)}.
-    \begin{itemize}
-        \item Relation: Course will hold instructor tuples for whom have access to course administration. Course will also hold possible courses that a student is/have taking/taken. 
-        \item Error Handling: Students will have only grades from courses that exist in courses, and instructors may only preside over courses that a tuple exists for. 
-    \end{itemize}
-
-    \item \textbf{Assignment:} with attributes \textit{(\underline{course\_id}, 
-    \underline{assignment\_id}, assignment\_name, max\_score, weight, due\_date)}.
-        \begin{itemize}
-        \item Relation: Relates to course in which course an instructor has domain over to issue feedback. Grants access to assignments in a course. 
-        \item Error Handling: Assignments must pertain to a course that exists in the course id. 
-    \end{itemize}
-    
-    \item \textbf{Exam:} with attributes \textit{(\underline{course\_id}, \underline{exam\_id}, exam\_name, max\_score, weight, due\_date)}.
-    \begin{itemize}
-        \item Relation: One of possible 3 grading relations, still fleshing out based on attributes on other tables. Group consensus is this would hold examination grades. 
-        \item Error Handling: Exam must belong to a course. Instructors and students would only have access to exams scores they are entitled to. 
-    \end{itemize} 
-    
-    \item \textbf{Cutoff:} with attributes \textit{(\underline{course\_id}, \underline{instructor\_id},grade\_letter, min\_score)}.
-        \begin{itemize}
-        \item Relation: An individual grading cutoff for each course, unique to each set by instructor. 
-        \item Error Handling: Cutoff must belong to one course and instructor may only set if they have a tuple in the course relation.  
-    \end{itemize} 
-    
-\end{itemize}
-\textbf{Relationship Sets:}
-\begin{itemize}  
-    \item \textbf{Takes:} with attributes \textit{(\underline{student\_id}, \underline{course\_id}, semester, year, grade)}.
-    \item \textbf{Teaches:} with attributes \textit{(\underline{instructor\_id}, \underline{course\_id}, semester, year)}.
-\end{itemize}
-
-\pagebreak
 
 \section*{1. Introduction to the Deliverable}
 
@@ -256,7 +201,5 @@ To successfully design and implement a system that tracks course performance and
     \item \textbf{Takes:} with attributes \textit{(\underline{student\_id}, \underline{course\_id}, semester, year, grade)}.
     \item \textbf{Teaches:} with attributes \textit{(\underline{instructor\_id}, \underline{course\_id}, semester, year)}.
 \end{itemize}
-
-
 
 \end{document}
