@@ -202,7 +202,7 @@ To successfully design and implement a system that tracks course performance and
     \item \textbf{Teaches:} with attributes \textit{(\underline{instructor\_id}, \underline{course\_id}, semester, year)}.
 \end{itemize}
 
-\section*{8. Tables}
+\section*{8a. Tables}
 \textit{Objective:} Organize and categorize each element of information into groups that will become tables based on the content reference.
 Your submission will be a document including a list of each of your tables as well as each field in the table and the data type for each field. You will also identify keys (primary, foreign, etc).
 
@@ -277,6 +277,194 @@ Your submission will be a document including a list of each of your tables as we
         \item Relation: Tracks actions taken in the system for auditing purposes (e.g., grade changes, assignment creation).
         \item Error Handling: Each action must be linked to a valid system user (instructor/student/admin).
     \end{itemize}
+\end{itemize}
+
+\section*{8b. Organizing and Categorizing Elements}
+
+The goal of this section is to organize and categorize each element of information into groups that will become tables. Each table will represent an entity or a relationship in the system, structured according to the content reference of our brainstorming session.
+
+\subsection*{Entity Tables}
+
+\begin{itemize}
+    \item \textbf{Instructor Table}
+    \begin{itemize}
+        \item \underline{Attributes:}
+        \begin{itemize}
+            \item \textit{ID} (Primary Key): A unique identifier for each instructor.
+            \item \textit{Name}: The name of the instructor.
+            \item \textit{Email}: The instructor's email address.
+            \item \textit{Department}: The department the instructor belongs to.
+            \item \textit{Phone\_Number}: The contact number of the instructor.
+            \item \textit{Office\_Location}: The location of the instructor's office.
+            \item \textit{Hire\_Date}: The date the instructor was hired.
+            \item \textit{Login\_Credentials}: Information for system access.
+            \item \textit{Role}: The role of the instructor (e.g., professor, teaching assistant).
+        \end{itemize}
+    \end{itemize}
+    
+    \item \textbf{Student Table}
+    \begin{itemize}
+        \item \underline{Attributes:}
+        \begin{itemize}
+            \item \textit{ID} (Primary Key): A unique identifier for each student.
+            \item \textit{Name}: The student's name.
+            \item \textit{Email}: The student's email address.
+            \item \textit{GPA}: The student's current GPA, calculated from all courses.
+            \item \textit{Major}: The student's field of study.
+            \item \textit{Year}: The current year of study (e.g., freshman, sophomore).
+            \item \textit{Enrollment\_Date}: The date the student was enrolled.
+            \item \textit{Graduation\_Date}: The expected date of graduation.
+            \item \textit{Phone\_Number}: The contact number of the student.
+            \item \textit{Address}: The student's home or campus address.
+        \end{itemize}
+    \end{itemize}
+    
+    \item \textbf{Course Table}
+    \begin{itemize}
+        \item \underline{Attributes:}
+        \begin{itemize}
+            \item \textit{Course\_ID} (Primary Key): A unique identifier for each course.
+            \item \textit{Instructor\_ID} (Foreign Key): A reference to the instructor teaching the course.
+            \item \textit{Title}: The name of the course.
+            \item \textit{Section}: The specific section number for the course.
+            \item \textit{Semester}: The semester in which the course is offered.
+            \item \textit{Year}: The year in which the course is offered.
+            \item \textit{Enrollment}: The number of students enrolled.
+            \item \textit{Credits}: The number of credits the course carries.
+            \item \textit{Schedule}: The course schedule (days and time).
+            \item \textit{Classroom\_Location}: The location of the classroom where the course is held.
+            \item \textit{Prerequisites}: Any prerequisite courses needed for enrollment.
+            \item \textit{Course\_Description}: A short description of the course content.
+        \end{itemize}
+    \end{itemize}
+    
+    \item \textbf{Assignment Table}
+    \begin{itemize}
+        \item \underline{Attributes:}
+        \begin{itemize}
+            \item \textit{Course\_ID} (Foreign Key): A reference to the course to which the assignment belongs.
+            \item \textit{Assignment\_ID} (Primary Key): A unique identifier for each assignment.
+            \item \textit{Assignment\_Name}: The name of the assignment.
+            \item \textit{Max\_Score}: The maximum score possible for the assignment.
+            \item \textit{Weight}: The weight of the assignment in the final grade.
+            \item \textit{Due\_Date}: The due date for the assignment.
+            \item \textit{Description}: A brief description of the assignment.
+            \item \textit{Submission\_Type}: The type of submission (online, physical, etc.).
+            \item \textit{Submission\_Status}: The current status of the submission (submitted, pending, etc.).
+            \item \textit{Grading\_Rubric}: The rubric used for grading the assignment.
+        \end{itemize}
+    \end{itemize}
+    
+    \item \textbf{Exam Table}
+    \begin{itemize}
+        \item \underline{Attributes:}
+        \begin{itemize}
+            \item \textit{Course\_ID} (Foreign Key): A reference to the course to which the exam belongs.
+            \item \textit{Exam\_ID} (Primary Key): A unique identifier for each exam.
+            \item \textit{Exam\_Name}: The name of the exam.
+            \item \textit{Max\_Score}: The maximum score possible for the exam.
+            \item \textit{Weight}: The weight of the exam in the final grade.
+            \item \textit{Due\_Date}: The due date for the exam.
+            \item \textit{Exam\_Type}: The type of exam (midterm, final, quiz).
+            \item \textit{Duration}: The duration of the exam.
+            \item \textit{Location}: The location where the exam is held.
+            \item \textit{Open\_Closed\_Book}: Indicates whether the exam is open or closed book.
+        \end{itemize}
+    \end{itemize}
+    
+    \item \textbf{Cutoff Table}
+    \begin{itemize}
+        \item \underline{Attributes:}
+        \begin{itemize}
+            \item \textit{Course\_ID} (Foreign Key): A reference to the course.
+            \item \textit{Instructor\_ID} (Foreign Key): A reference to the instructor.
+            \item \textit{Grade\_Letter}: The letter grade (A, B, C, etc.).
+            \item \textit{Min\_Score}: The minimum score required to achieve the grade.
+            \item \textit{Max\_Score}: The maximum score for the grade range.
+            \item \textit{Grading\_Scheme\_Version}: Version control for grading scheme changes.
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Relationship Tables}
+
+\begin{itemize}
+    \item \textbf{Takes Table}
+    \begin{itemize}
+        \item \underline{Attributes:}
+        \begin{itemize}
+            \item \textit{Student\_ID} (Foreign Key): A reference to the student taking the course.
+            \item \textit{Course\_ID} (Foreign Key): A reference to the course.
+            \item \textit{Semester}: The semester when the course was taken.
+            \item \textit{Year}: The year when the course was taken.
+            \item \textit{Grade}: The final grade received.
+            \item \textit{Completion\_Status}: Status of course completion (completed, withdrawn, etc.).
+            \item \textit{Attendance\_Record}: Optional attribute to track attendance.
+        \end{itemize}
+    \end{itemize}
+    
+    \item \textbf{Teaches Table}
+    \begin{itemize}
+        \item \underline{Attributes:}
+        \begin{itemize}
+            \item \textit{Instructor\_ID} (Foreign Key): A reference to the instructor teaching the course.
+            \item \textit{Course\_ID} (Foreign Key): A reference to the course being taught.
+            \item \textit{Semester}: The semester when the course is taught.
+            \item \textit{Year}: The year when the course is taught.
+            \item \textit{Primary\_Instructor}: Boolean to indicate whether this is the primary instructor for the course.
+            \item \textit{Office\_Hours}: The office hours of the instructor for the course.
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Additional Tables}
+
+\begin{itemize}
+    \item \textbf{Feedback Table}
+    \begin{itemize}
+        \item \underline{Attributes:}
+        \begin{itemize}
+            \item \textit{Feedback\_ID} (Primary Key): A unique identifier for each feedback entry.
+            \item \textit{Student\_ID} (Foreign Key): A reference to the student receiving the feedback.
+            \item \textit{Assignment\_ID} (Foreign Key): A reference to the assignment for which feedback is given.
+            \item \textit{Instructor\_ID} (Foreign Key): A reference to the instructor giving the feedback.
+            \item \textit{Comments}: Textual feedback or comments provided by the instructor.
+            \item \textit{Date}: The date on which the feedback was given.
+        \end{itemize}
+        \item \underline{Relation:} Feedback will be linked to specific assignments and students, allowing for detailed tracking of feedback on each task.
+        \item \underline{Error Handling:} Ensure feedback can only be created if both the student and assignment exist in their respective tables.
+    \end{itemize}
+
+    \item \textbf{Attendance Table}
+    \begin{itemize}
+        \item \underline{Attributes:}
+        \begin{itemize}
+            \item \textit{Attendance\_ID} (Primary Key): A unique identifier for each attendance record.
+            \item \textit{Student\_ID} (Foreign Key): A reference to the student whose attendance is being recorded.
+            \item \textit{Course\_ID} (Foreign Key): A reference to the course for which the attendance is recorded.
+            \item \textit{Date}: The date of the attendance record.
+            \item \textit{Status}: Attendance status (e.g., Present, Absent, Late).
+        \end{itemize}
+        \item \underline{Relation:} Tracks students' attendance in specific courses.
+        \item \underline{Error Handling:} Ensure attendance can only be recorded for valid students and courses.
+    \end{itemize}
+
+    \item \textbf{Course Evaluation Table}
+    \begin{itemize}
+        \item \underline{Attributes:}
+        \begin{itemize}
+            \item \textit{Evaluation\_ID} (Primary Key): A unique identifier for each course evaluation.
+            \item \textit{Student\_ID} (Foreign Key): A reference to the student submitting the evaluation.
+            \item \textit{Course\_ID} (Foreign Key): A reference to the course being evaluated.
+            \item \textit{Instructor\_ID} (Foreign Key): A reference to the instructor being evaluated.
+            \item \textit{Rating}: A numerical rating given by the student.
+            \item \textit{Comments}: Additional comments or feedback provided by the student.
+            \item \textit{Date}: The date the evaluation was submitted.
+        \end{itemize}
+        \item \underline{Relation:} Links evaluations to specific students, courses, and instructors for performance and feedback purposes.
+        \item \underline{Error Handling:} Ensure evaluations can only be submitted for valid courses and students.
+    \end{itemize}
+    
 \end{itemize}
 
 
