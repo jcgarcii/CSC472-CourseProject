@@ -1,5 +1,5 @@
 
-# CSC 472 Semester Project: Course Performance Information Management System
+# Course Performance Information Management System
 
 ## 1. Introduction
 
