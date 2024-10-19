@@ -1,6 +1,5 @@
 
 # Course Performance Information Management System
-![MySQL Language Logo](https://www.svgrepo.com/show/473731/mysql.svg)
 ## 1. Introduction
 
 This project is the semester-long deliverable for CSC 472, focused on designing a Database Management System (DBMS) for a grading and feedback system. The project not only fulfills the course requirements but also aims to extend beyond the class to enhance our resumes and portfolios.
