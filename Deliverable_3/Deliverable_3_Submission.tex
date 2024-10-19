@@ -1,0 +1,262 @@
+\documentclass[12pt]{article}
+
+% Packages for enhanced formatting
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{parskip} % Remove indentation
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{aligned-overset}
+\usepackage{longtable}   % For tables that span multiple pages
+\usepackage{adjustbox}   % To adjust table width if needed
+\geometry{a4paper, margin=1in}
+
+\begin{document}
+
+\begin{center}
+    \Large\textbf{Deliverable 2}
+\end{center}
+\vspace{0.5em}
+\hrule
+\vspace{1em}
+
+\noindent
+\textbf{Title:} Final Project - Deliverable 2 \\
+\textbf{Date:} October 10\textsuperscript{th}, 2024 \\
+\textbf{Student participating: } Homawoo, Elorm. K., Garcia, Jose. C., Vanderhoff, Will. R. \\
+\textbf{User IDs:}  ehoma2, jgarc435, wvand,\\
+\vspace{1em}
+\hrule
+
+\section*{7. Brainstorming}
+\textit{Objective:} Identify the elements needed for the database.
+
+To successfully design and implement a system that tracks course performance and allows for the addition of assignments or exams dynamically, we need to identify all the necessary components and features. Here’s a comprehensive list of elements and considerations that will help build this system.
+
+\textbf{Entity Sets:}
+
+\begin{itemize}
+
+    \item \textbf{Instructor:} with attributes \textit{(\underline{ID}, name, email, department)}.
+    \begin{itemize}
+        \item Relation: Relates and assigns domain over a course's administration. 
+        \item Error Handling: Professors must have a login in order to administer feedback to assigned courses. A professor who can assign feedback must have a tuple in Course. Additionally, professor must belong to a department that exists in the department table. 
+    \end{itemize}
+    
+    \item \textbf{Student:} with attributes \textit{(\underline{ID}, name, email, GPA)}.
+    \begin{itemize}
+        \item Relation: Student will have assigned tuples in various grading relations (still being fleshed out for optimum design). 
+        \item Error Handling: GPA is to be calculated from all student outcomes from assignments, exams, and overall reported grades in other relations such as Assignment, Exam, and Cutoff. 
+    \end{itemize}
+    
+    \item \textbf{Course:} with attributes \textit{(\underline{course\_id}, \underline{instructor\_id}, title, section, semester, year, enrollment)}.
+    \begin{itemize}
+        \item Relation: Course will hold instructor tuples for whom have access to course administration. Course will also hold possible courses that a student is/have taking/taken. 
+        \item Error Handling: Students will have only grades from courses that exist in courses, and instructors may only preside over courses that a tuple exists for. 
+    \end{itemize}
+
+    \item \textbf{Assignment:} with attributes \textit{(\underline{course\_id}, 
+    \underline{assignment\_id}, assignment\_name, max\_score, weight, due\_date)}.
+        \begin{itemize}
+        \item Relation: Relates to course in which course an instructor has domain over to issue feedback. Grants access to assignments in a course. 
+        \item Error Handling: Assignments must pertain to a course that exists in the course id. 
+    \end{itemize}
+    
+    \item \textbf{Exam:} with attributes \textit{(\underline{course\_id}, \underline{exam\_id}, exam\_name, max\_score, weight, due\_date)}.
+    \begin{itemize}
+        \item Relation: One of possible 3 grading relations, still fleshing out based on attributes on other tables. Group consensus is this would hold examination grades. 
+        \item Error Handling: Exam must belong to a course. Instructors and students would only have access to exams scores they are entitled to. 
+    \end{itemize} 
+    
+    \item \textbf{Cutoff:} with attributes \textit{(\underline{course\_id}, \underline{instructor\_id},grade\_letter, min\_score)}.
+        \begin{itemize}
+        \item Relation: An individual grading cutoff for each course, unique to each set by instructor. 
+        \item Error Handling: Cutoff must belong to one course and instructor may only set if they have a tuple in the course relation.  
+    \end{itemize} 
+    
+\end{itemize}
+\textbf{Relationship Sets:}
+\begin{itemize}  
+    \item \textbf{Takes:} with attributes \textit{(\underline{student\_id}, \underline{course\_id}, semester, year, grade)}.
+    \item \textbf{Teaches:} with attributes \textit{(\underline{instructor\_id}, \underline{course\_id}, semester, year)}.
+\end{itemize}
+
+\pagebreak
+
+\section*{1. Introduction to the Deliverable}
+
+\noindent
+\textit{Objective:} Identify and outline the key elements and intentions of the semester project for CSC 472.
+
+\noindent
+This deliverable aims to identify a semester project for CSC 472, highlight key elements of the project, the group’s intentions, and the historical basis for the project. Below is an overview:
+
+\begin{enumerate}
+    \item This group has selected to design a DBMS for a grading and feedback system, as outlined in Project 9.7 of the provided Course Project list.
+    \item The project will consist of two primary components:
+    \begin{enumerate}
+        \item The first component will satisfy the course requirements.
+        \item The second component will extend beyond the scope of the course to aid us in future job hunts by enhancing our resumes.
+    \end{enumerate}
+    \item This group aims to submit all required deliverables and documentation in a timely manner throughout the semester. This includes, but is not limited to:
+    \begin{enumerate}
+        \item The overall and complete design of the database for a grading and feedback system, pursuant to Project 9.7 of the Course Project Selection List.
+    \end{enumerate}
+    \item Additionally, some group members may choose to implement our design after all required submissions are met. This will be done to boost our portfolios, though we understand it will not impact our course grade.
+    \item We will use Discord for meetings and communication, and GitHub to track project iterations. This applies to both the mandatory submissions and any optional implementations.
+\end{enumerate}
+
+\section*{2. Identify the Project}
+\textit{Objective:} Explain what business or process that is to be addressed in the design of the Database Management System. \\
+
+\noindent
+The project is a Course Performance Information Management System, designed to record and manage student performance data in various courses. Specifically, the system allows:
+\begin{itemize}
+\item Input and storage of marks for each student across multiple assignments, quizzes, or exams in a course.
+\item The ability to add new assessments (assignments/exams) without predefined limits.
+\item Calculation of a weighted sum of marks to derive total course marks.
+\item A grading system that allows for the specification of cutoff values for various letter grades (e.g., A, B, C, D, F).
+\end{itemize}
+
+\section*{3. Reason for Analysis}
+\textit{Objective:} Explain the motivation for addressing the business situation, and why it was chosen.
+
+\noindent
+This project addresses the need for a streamlined, flexible system in educational institutions to manage student performance data efficiently. Traditional methods of maintaining student marks, such as using spreadsheets or paper records, can become cumbersome, especially when dealing with a large number of students, assignments, and grade calculations.\\
+\textbf{Motivation: }
+\begin{itemize}
+\item \textit{Efficiency:} Automating the process of recording, updating, and calculating grades saves significant time for instructors, allowing them to focus on more critical tasks like teaching and student engagement.
+\item \textit{Flexibility:} Instructors often need to add new assignments or assessments during the course. The system allows for dynamic addition of assignments/exams without predefined limits, ensuring scalability and flexibility.
+\item \textit{Accuracy:} Manual calculation of weighted totals and final grades is prone to errors, especially in large classes. A system that automatically computes grades based on preset weights ensures accurate grade calculation and fair assessments.
+\item \textit{Customization:} Every course might have different grading structures, weights for assignments, and grade cutoffs. This system allows instructors to set their specific course structure and grading criteria, accommodating diverse educational needs.
+\end{itemize}
+By addressing these issues, the system improves the academic workflow, reduces errors, and enhances both student and instructor experience. 
+
+\section*{4. Benefit of Analysis}
+\textit{Objective:} Explain what is to be expected from improving the business process. 
+
+\noindent
+While an overnight success is not promised through the improvement of said business process, we guarantee that data will be easy to access, understandable to the layman, and thoroughly insightful. Here are a few benefits:
+
+\begin{enumerate}
+    \item Whereas the reason, identification, and the overview of the project point to feedback systems, it is also important to highlight other contexts where such a project may exist. There are two forms of existence that this project can benefit:
+    \begin{enumerate}
+        \item The first is the improvement of an existing feedback/grading system with no DBMS.
+        \item The second is the upgrade to a dedicated feedback/grading system where no such digital system exists (e.g., paper copies are returned to employers/students as the main feedback).
+    \end{enumerate}
+    \item Scenario 1: There exists a system with no adequate DBMS.
+    \begin{enumerate}
+        \item The main improvement here would be that of convenience and redundancy over the existing system. Imagine a professor tracks grades manually in a notebook. A proper system with a dedicated DBMS would offer:
+        \begin{enumerate}
+            \item \textbf{Flexibility:} The professor can easily add another assignment/relation for each student without worrying about space.
+            \item \textbf{Redundancy/Security:} It would be much more difficult for a student to tamper with grades compared to simply stealing a grade notebook.
+            \item \textbf{Convenience:} Both the professor and student would have access to the grades at any time, making feedback and responses more streamlined.
+            \item \textbf{Efficiency:} The professor can provide feedback on past grades, enabling a more informed and positive learning environment.
+        \end{enumerate}
+    \end{enumerate}
+    \item Scenario 2: There exists no system and no DBMS.
+    \begin{enumerate}
+        \item For example, in performance reviews for employees, feedback is often on paper, making it easy to lose or misplace. Improvements would include:
+        \begin{enumerate}
+            \item All the benefits from Scenario 1.
+            \item \textbf{More Data:} Having more data on performance and feedback can lead to better decision-making and tracking, providing valuable insights.
+        \end{enumerate}
+    \end{enumerate}
+\end{enumerate}
+
+\section*{5. Project Overview}
+\textit{Objective:} Outline the project steps. 
+
+In the following list, we attempt to show what the project creation timeline will be:
+\begin{enumerate}[labelindent=\parindent,leftmargin=!]
+\item Brainstorm:\\
+Identify all the elements needed to allow the automation of the project.
+\item Table Creation:\\
+Create tables through categorization and organization of elements decided upon in the brainstorming process.
+\item Normalization:\\
+Identify and eliminate redundant data, verify data dependencies. 
+\item Schema Design:\\
+Identify the storage and space needs for the storage of the data model. Create a data model. 
+\item Project Review Report:\\
+Report on efforts, methodologies and educational benefits of the project. 
+\end{enumerate}
+This timeline is modeled after the deliverables required to complete the project. There may be additional steps added or taken at any point in time depending on the needs of the project and team. 
+
+\section*{6. Documents Needed}
+\textit{Objective:} Explain the role and importance of documentation in the design and implementation of a DBMS.
+
+\noindent
+Documentation is crucial not only for the initial success of the system but also for maintaining its long-term functionality. Below is an outline of the documentation that is both needed and already exists:
+
+\begin{enumerate}
+    \item Documentation to be developed:
+    \begin{enumerate}[leftmargin=0.75cm]
+        \item \textbf{Overview of DBMS Design:} This aligns with the 3rd to 5th deliverable, as it covers the assembly of project components.
+        \item \textbf{Reasoning Behind Design Choices:} For instance, why was Table A included but not Table C?
+        \item \textbf{Iterative Changes:} What modifications were made from Design K to Design P? What steps were taken, and was this an improvement?
+        \item \textbf{Project Timeline and Updates:} Keeping a project journal is beneficial, especially for projects built from scratch.
+    \end{enumerate}
+    \item Documentation that already exists and is needed:
+    \begin{enumerate}[leftmargin=0.75cm]
+        \item Course book.
+        \item Geek-for-Geeks articles.
+        \item Research papers on feedback to distinguish essential features from unnecessary components in the design.
+    \end{enumerate}
+\end{enumerate}
+
+\section*{7. Brainstorming}
+\textit{Objective:} Identify the elements needed for the database.
+
+To successfully design and implement a system that tracks course performance and allows for the addition of assignments or exams dynamically, we need to identify all the necessary components and features. Here’s a comprehensive list of elements and considerations that will help build this system.
+
+\textbf{Entity Sets:}
+
+\begin{itemize}
+
+    \item \textbf{Instructor:} with attributes \textit{(\underline{ID}, name, email, department)}.
+    \begin{itemize}
+        \item Relation: Relates and assigns domain over a course's administration. 
+        \item Error Handling: Professors must have a login in order to administer feedback to assigned courses. A professor who can assign feedback must have a tuple in Course. Additionally, professor must belong to a department that exists in the department table. 
+    \end{itemize}
+    
+    \item \textbf{Student:} with attributes \textit{(\underline{ID}, name, email, GPA)}.
+    \begin{itemize}
+        \item Relation: Student will have assigned tuples in various grading relations (still being fleshed out for optimum design). 
+        \item Error Handling: GPA is to be calculated from all student outcomes from assignments, exams, and overall reported grades in other relations such as Assignment, Exam, and Cutoff. 
+    \end{itemize}
+    
+    \item \textbf{Course:} with attributes \textit{(\underline{course\_id}, \underline{instructor\_id}, title, section, semester, year, enrollment)}.
+    \begin{itemize}
+        \item Relation: Course will hold instructor tuples for whom have access to course administration. Course will also hold possible courses that a student is/have taking/taken. 
+        \item Error Handling: Students will have only grades from courses that exist in courses, and instructors may only preside over courses that a tuple exists for. 
+    \end{itemize}
+
+    \item \textbf{Assignment:} with attributes \textit{(\underline{course\_id}, 
+    \underline{assignment\_id}, assignment\_name, max\_score, weight, due\_date)}.
+        \begin{itemize}
+        \item Relation: Relates to course in which course an instructor has domain over to issue feedback. Grants access to assignments in a course. 
+        \item Error Handling: Assignments must pertain to a course that exists in the course id. 
+    \end{itemize}
+    
+    \item \textbf{Exam:} with attributes \textit{(\underline{course\_id}, \underline{exam\_id}, exam\_name, max\_score, weight, due\_date)}.
+    \begin{itemize}
+        \item Relation: One of possible 3 grading relations, still fleshing out based on attributes on other tables. Group consensus is this would hold examination grades. 
+        \item Error Handling: Exam must belong to a course. Instructors and students would only have access to exams scores they are entitled to. 
+    \end{itemize} 
+    
+    \item \textbf{Cutoff:} with attributes \textit{(\underline{course\_id}, \underline{instructor\_id},grade\_letter, min\_score)}.
+        \begin{itemize}
+        \item Relation: An individual grading cutoff for each course, unique to each set by instructor. 
+        \item Error Handling: Cutoff must belong to one course and instructor may only set if they have a tuple in the course relation.  
+    \end{itemize} 
+    
+\end{itemize}
+\textbf{Relationship Sets:}
+\begin{itemize}  
+    \item \textbf{Takes:} with attributes \textit{(\underline{student\_id}, \underline{course\_id}, semester, year, grade)}.
+    \item \textbf{Teaches:} with attributes \textit{(\underline{instructor\_id}, \underline{course\_id}, semester, year)}.
+\end{itemize}
+
+
+
+\end{document}
