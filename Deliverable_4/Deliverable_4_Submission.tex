@@ -448,11 +448,181 @@ The goal of this section is to organize and categorize each element of informati
 
 \pagebreak
 
-\section*{9. Normalization}
+\section*{Section 9: Normalization}
 
-Perform Normalization on the tables you created. I want you to identify and eliminate redundant data and ensure that data dependencies make sense (data is logically stored).
-It is possible that your tables are already normalized. In that case, simply explain what checks you performed to confirm that. 
-If you are making changes to your tables, explain what changes are being made and why.
+Normalization is the process of organizing data in a database to reduce redundancy and improve data integrity. This section outlines the normalization steps taken for each table created in Section 8.
+
+\subsection*{1. First Normal Form (1NF)}
+\begin{table}[ht]
+    \centering
+    \begin{tabularx}{\textwidth}{|X|X|X|X|}
+        \hline
+        \textbf{Table Name} & \textbf{1NF Compliance} & \textbf{Proposed Changes} & \textbf{Reason} \\
+        \hline
+        Instructor Table & Yes & None & All attributes contain only single values. \\
+        \hline
+        Student Table & Yes & None & All attributes contain only single values. \\
+        \hline
+        Course Table & Yes & None & All attributes contain only single values. \\
+        \hline
+        Assignment Table & Yes & None & All attributes contain only single values. \\
+        \hline
+        Exam Table & Yes & None & All attributes contain only single values. \\
+        \hline
+        Cutoff Table & Yes & None & All attributes contain only single values. \\
+        \hline
+        Feedback Table & Yes & None & All attributes contain only single values. \\
+        \hline
+        Takes Table & Yes & None & All attributes contain only single values. \\
+        \hline
+        Teaches Table & Yes & None & All attributes contain only single values. \\
+        \hline
+    \end{tabularx}
+    \caption{1NF Compliance Check for Tables}
+    \label{tab:1nf_compliance}
+\end{table}
+
+\pagebreak
+
+\subsection*{2. Second Normal Form (2NF)}
+\begin{table}[ht]
+    \centering
+    \begin{tabularx}{\textwidth}{|X|X|X|X|}
+        \hline
+        \textbf{Table Name} & \textbf{2NF Compliance} & \textbf{Proposed Changes} & \textbf{Reason} \\
+        \hline
+        Instructor Table & Yes & None & All non-key attributes depend on the primary key. \\
+        \hline
+        Student Table & Yes & None & All non-key attributes depend on the primary key. \\
+        \hline
+        Course Table & Yes & None & All non-key attributes depend on the primary key. \\
+        \hline
+        Assignment Table & Yes & None & All non-key attributes depend on the primary key. \\
+        \hline
+        Exam Table & Yes & None & All non-key attributes depend on the primary key. \\
+        \hline
+        Cutoff Table & Yes & None & All non-key attributes depend on the primary key. \\
+        \hline
+        Feedback Table & Yes & None & All non-key attributes depend on the primary key. \\
+        \hline
+        Takes Table & Yes & None & All non-key attributes depend on the primary key. \\
+        \hline
+        Teaches Table & Yes & None & All non-key attributes depend on the primary key. \\
+        \hline
+    \end{tabularx}
+    \caption{2NF Compliance Check for Tables}
+    \label{tab:2nf_compliance}
+\end{table}
+
+
+\pagebreak
+
+\subsection*{3. Third Normal Form (3NF)}
+\begin{table}[ht]
+    \centering
+    \begin{tabularx}{\textwidth}{|X|X|X|X|}
+        \hline
+        \textbf{Table Name} & \textbf{3NF Compliance} & \textbf{Proposed Changes} & \textbf{Reason} \\
+        \hline
+        Instructor Table & Yes & Change Department to Department\_ID (Foreign Key) & Remove transitive dependency on Department Name. \\
+        \hline
+        Student Table & Yes & Change Department to Department\_ID (Foreign Key) & Remove transitive dependency on Department Name. \\
+        \hline
+        Course Table & Yes & None & No transitive dependencies exist. \\
+        \hline
+        Assignment Table & Yes & None & No transitive dependencies exist. \\
+        \hline
+        Exam Table & Yes & None & No transitive dependencies exist. \\
+        \hline
+        Cutoff Table & Yes & None & No transitive dependencies exist. \\
+        \hline
+        Feedback Table & Yes & None & No transitive dependencies exist. \\
+        \hline
+        Takes Table & Yes & None & No transitive dependencies exist. \\
+        \hline
+        Teaches Table & Yes & None & No transitive dependencies exist. \\
+        \hline
+        Department Table & No & Create a Department Table & Normalize to eliminate redundancy. \\
+        \hline
+    \end{tabularx}
+    \caption{3NF Compliance Check for Tables}
+    \label{tab:3nf_compliance}
+\end{table}
+
+
+
+\pagebreak
+
+\subsection*{4. Boyce-Codd Normal Form (BCNF)}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabularx}{\textwidth}{|X|X|X|X|}
+        \hline
+        \textbf{Table Name} & \textbf{BCNF Compliance} & \textbf{Proposed Changes} & \textbf{Reason} \\
+        \hline
+        Instructor Table & Yes & None & All functional dependencies comply. \\
+        \hline
+        Student Table & Yes & None & All functional dependencies comply. \\
+        \hline
+        Course Table & No & Adjust functional dependencies (semester, year, instructor) & Non-superkey attributes determine another attribute. \\
+        \hline
+        Assignment Table & Yes & None & All functional dependencies comply. \\
+        \hline
+        Exam Table & Yes & None & All functional dependencies comply. \\
+        \hline
+        Cutoff Table & Yes & None & All functional dependencies comply. \\
+        \hline
+        Feedback Table & Yes & None & All functional dependencies comply. \\
+        \hline
+        Takes Table & Yes & None & All functional dependencies comply. \\
+        \hline
+        Teaches Table & Yes & None & All functional dependencies comply. \\
+        \hline
+        Department Table & Yes & None & All functional dependencies comply. \\
+        \hline
+    \end{tabularx}
+    \caption{BCNF Compliance Check for Tables}
+    \label{tab:bcnf_compliance}
+\end{table}
+
+
+\subsection*{5. Final Product after Normalization (after Conclusion due to Latex)}
+\begin{table}[ht]
+    \centering
+    \begin{tabularx}{\textwidth}{|X|X|X|}
+        \hline
+        \textbf{Table Name} & \textbf{Attributes (with Changes)} & \textbf{Changes During Normalization} \\
+        \hline
+        Instructor Table & \underline{ID} (Primary Key), Name, Email, Department\_ID (Foreign Key), Phone, Role & Changed Department to Department\_ID (Foreign Key). \\
+        \hline
+        Student Table & \underline{ID} (Primary Key), Name, Email, GPA, Department\_ID (Foreign Key), Year, Enrollment Date, Graduation Date, Phone, Address & Changed Department to Department\_ID (Foreign Key). \\
+        \hline
+        Course Table & \underline{Course ID} (Primary Key), Instructor ID (Foreign Key), Title, Section, Semester, Year, Enrollment, Credits, Prerequisites, Course Description & None. \\
+        \hline
+        Assignment Table & \underline{Assignment ID} (Primary Key), Course ID (Foreign Key), Assignment Name, Max Score, Weight, Due Date, Description, Submission Type, Submission Status, Grading Rubric & None. \\
+        \hline
+        Exam Table & \underline{Exam ID} (Primary Key), Course ID (Foreign Key), Exam Name, Max Score, Weight, Due Date, Exam Type, Open Closed Book & None. \\
+        \hline
+        Cutoff Table & \underline{Instructor ID} (Foreign Key), Course ID (Foreign Key), \underline{Grade Letter} (Primary Key), Min Score, Max Score & None. \\
+        \hline
+        Feedback Table & \underline{Feedback ID} (Primary Key), Student ID (Foreign Key), Assignment ID (Foreign Key), Instructor ID (Foreign Key), Comments, Date & None. \\
+        \hline
+        Takes Table & \underline{Student ID} (Foreign Key), Course ID (Foreign Key), Semester, Year, Grade, Completion Status & None. \\
+        \hline
+        Teaches Table & \underline{Instructor ID} (Foreign Key), Course ID (Foreign Key), Semester, Year, Primary Instructor & None. \\
+        \hline
+        Department Table & \underline{Department ID} (Primary Key), Department Name, Department Head & Created new Department Table to eliminate redundancy. \\
+        \hline
+    \end{tabularx}
+    \caption{Final Structure After Normalization}
+    \label{tab:final_structure}
+\end{table}
+
+\subsection*{Conclusion}
+There were a few instances of overlooking while we were building out our tables in the first few weeks of the project. This is evident, for example, in the exclusion of a dedicated Department table that is present in the book. There were minor tweaks to our tables, however, for the most part - our baked-in normalization process when the group was developing tables stood strong. 
+
+\end{document}
 
 
 \end{document}
