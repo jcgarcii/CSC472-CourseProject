@@ -296,7 +296,7 @@ The goal of this section is to organize and categorize each element of informati
             \item \textit{ID} (Primary Key): CHAR(9) - A unique identifier for each instructor. 
             \item \textit{Name}: VARCHAR(255) - The name of the instructor.
             \item \textit{Email}: VARCHAR(255) - The instructor's email address.
-            \item \textit{Department}: VARCHAR(20) - The department the instructor belongs to.
+            \item \textit{Department}: VARCHAR(100) - The department the instructor belongs to.
             \item \textit{Phone}: VARCHAR(15) - The contact number of the instructor.
             \item \textit{Role}: VARCHAR(20) - The role of the instructor (e.g., professor, teaching assistant).
         \end{itemize}
@@ -309,8 +309,8 @@ The goal of this section is to organize and categorize each element of informati
             \item \textit{ID} (Primary Key): CHAR(9) - A unique identifier for each student.
             \item \textit{Name}: VARCHAR(255) - The student's name.
             \item \textit{Email}: VARCHAR(255) - The student's email address.
-            \item \textit{GPA}: DECIMAL(1,2) The student's current GPA, calculated from all courses.
-            \item \textit{Department}: VARCHAR(20) - The student's field of study.
+            \item \textit{GPA}: DECIMAL(3,2) The student's current GPA, calculated from all courses.
+            \item \textit{Department}: VARCHAR(100) - The student's field of study.
             \item \textit{Year}: YEAR - The current year of study (e.g., freshman, sophomore).
             \item \textit{Enrollment\_Date}: DATE - The date the student was enrolled.
             \item \textit{Graduation\_Date}: DATE - The expected date of graduation.
@@ -329,8 +329,8 @@ The goal of this section is to organize and categorize each element of informati
             \item \textit{Section}: VARCHAR(10) - The specific section number for the course.
             \item \textit{Semester}: VARCHAR(20) - The semester in which the course is offered.
             \item \textit{Year}: YEAR - The year in which the course is offered.
-            \item \textit{Enrollment}: INT(10) - The number of students enrolled.
-            \item \textit{Credits}: DECIMAL(5, 0) - The number of credits the course carries.
+            \item \textit{Enrollment}: INT - The number of students enrolled.
+            \item \textit{Credits}: DECIMAL(3, 1) - The number of credits the course carries.
             \item \textit{Prerequisites}: VARCHAR(10) - Any prerequisite courses needed for enrollment.
             \item \textit{Course\_Description}: VARCHAR(255) - A short description of the course content.
         \end{itemize}
@@ -340,11 +340,11 @@ The goal of this section is to organize and categorize each element of informati
     \begin{itemize}
         \item \underline{Attributes:}
         \begin{itemize}
-            \item \textit{Course\_ID} (Foreign Key): CHAR(9) - A reference to the course to which the assignment belongs.
+            \item \textit{Course\_ID} (Foreign Key): VARCHAR(10) - A reference to the course to which the assignment belongs.
             \item \textit{Assignment\_ID} (Primary Key): CHAR(9) - A unique identifier for each assignment.
             \item \textit{Assignment\_Name}: VARCHAR(255) - The name of the assignment.
-            \item \textit{Max\_Score}: INT(10) - The maximum score possible for the assignment.
-            \item \textit{Weight}: DECIMAL(5, 0) - The weight of the assignment in the final grade.
+            \item \textit{Max\_Score}: INT - The maximum score possible for the assignment.
+            \item \textit{Weight}: DECIMAL(5, 2) - The weight of the assignment in the final grade.
             \item \textit{Due\_Date}: DATE - The due date for the assignment.
             \item \textit{Description}: VARCHAR(255) - A brief description of the assignment.
             \item \textit{Submission\_Type}: VARCHAR(20) - The type of submission (online, physical, etc.).
@@ -358,11 +358,11 @@ The goal of this section is to organize and categorize each element of informati
     \begin{itemize}
         \item \underline{Attributes:}
         \begin{itemize}
-            \item \textit{Exam\_ID} (Primary Key): CHAR(15) - A unique identifier for each exam.
-            \item \textit{Course\_ID} (Foreign Key): CHAR(10) - A reference to the course to which the exam belongs.
+            \item \textit{Exam\_ID} (Primary Key): CHAR(10) - A unique identifier for each exam.
+            \item \textit{Course\_ID} (Foreign Key): VARCHAR(10) - A reference to the course to which the exam belongs.
             \item \textit{Exam\_Name}: VARCHAR(20) - The name of the exam.
-            \item \textit{Max\_Score}: DECIMAL(10,2) - The maximum score possible for the exam.
-            \item \textit{Weight}: DECIMAL(10, 2) - The weight of the exam in the final grade.
+            \item \textit{Max\_Score}: DECIMAL(5,2) - The maximum score possible for the exam.
+            \item \textit{Weight}: DECIMAL(5, 2) - The weight of the exam in the final grade.
             \item \textit{Due\_Date}: DATE - The due date for the exam.
             \item \textit{Exam\_Type}: VARCHAR(20) - The type of exam (midterm, final, quiz).
             \item \textit{Open\_Closed\_Book}: VARCHAR(20) - Indicates whether the exam is open or closed book.
@@ -376,8 +376,8 @@ The goal of this section is to organize and categorize each element of informati
             \item \textit{Instructor\_ID} (Foreign Key): CHAR(9) - A reference to the instructor.
             \item \textit{Course\_ID} (Foreign Key): VARCHAR(10) - A reference to the course.
             \item \textit{Grade\_Letter}: CHAR(2) - The letter grade (A, B, C, etc.).
-            \item \textit{Min\_Score}: DECIMAL(10, 2) - The minimum score required to achieve the grade.
-            \item \textit{Max\_Score}: DECIMAL(10, 2) - The maximum score for the grade range.
+            \item \textit{Min\_Score}: DECIMAL(5, 2) - The minimum score required to achieve the grade.
+            \item \textit{Max\_Score}: DECIMAL(5, 2) - The maximum score for the grade range.
         \end{itemize}
     \end{itemize}
 
@@ -405,11 +405,11 @@ The goal of this section is to organize and categorize each element of informati
         \item \underline{Attributes:}
         \begin{itemize}
             \item \textit{Student\_ID} (Foreign Key): CHAR(9) - A reference to the student taking the course.
-            \item \textit{Course\_ID} (Foreign Key): CHAR(9) - A reference to the course.
+            \item \textit{Course\_ID} (Foreign Key): VARCHAR(10) - A reference to the course.
             \item \textit{Semester}: VARCHAR(20) - The semester when the course was taken.
             \item \textit{Year}: YEAR - The year when the course was taken.
-            \item \textit{Grade}: DECIMAL(256,2) -  The final grade received.
-            \item \textit{Completion\_Status}: VARCHAR(256) - Status of course completion (completed, withdrawn, etc.).
+            \item \textit{Grade}: DECIMAL(5,2) -  The final grade received.
+            \item \textit{Completion\_Status}: VARCHAR(100) - Status of course completion (completed, withdrawn, etc.).
         \end{itemize}
     \end{itemize}
     
@@ -418,7 +418,7 @@ The goal of this section is to organize and categorize each element of informati
         \item \underline{Attributes:}
         \begin{itemize}
             \item \textit{Instructor\_ID} (Foreign Key): CHAR(9) - A reference to the instructor teaching the course.
-            \item \textit{Course\_ID} (Foreign Key): CHAR(9) - A reference to the course being taught.
+            \item \textit{Course\_ID} (Foreign Key): VARCHAR(10) - A reference to the course being taught.
             \item \textit{Semester}: VARCHAR(20) - The semester when the course is taught.
             \item \textit{Year}: YEAR - The year when the course is taught.
             \item \textit{Primary\_Instructor}: BOOL - Boolean to indicate whether this is the primary instructor for the course.
@@ -435,7 +435,7 @@ The goal of this section is to organize and categorize each element of informati
         \begin{itemize}
             \item \textit{Evaluation\_ID} (Primary Key): CHAR(9) - A unique identifier for each course evaluation.
             \item \textit{Student\_ID} (Foreign Key): CHAR(9) - A reference to the student submitting the evaluation.
-            \item \textit{Course\_ID} (Foreign Key): CHAR(9) - A reference to the course being evaluated.
+            \item \textit{Course\_ID} (Foreign Key): VARCHAR(10) - A reference to the course being evaluated.
             \item \textit{Instructor\_ID} (Foreign Key): CHAR(9) - A reference to the instructor being evaluated.
             \item \textit{Rating}: INT - A numerical rating given by the student.
             \item \textit{Comments}: VARCHAR(256) - Additional comments or feedback provided by the student.
