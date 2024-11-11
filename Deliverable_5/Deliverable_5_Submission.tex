@@ -3,11 +3,12 @@
 % Packages for enhanced formatting
 \usepackage{geometry}
 \usepackage{titlesec}
+\usepackage{float}
 \usepackage{parskip} % Remove indentation
 \usepackage{graphicx}
 \usepackage{enumitem}
 \usepackage{aligned-overset}
-\usepackage{longtable}   % For tables that span multiple pages
+\usepackage{tabularx}
 \usepackage{adjustbox}   % To adjust table width if needed
 \geometry{a4paper, margin=1in}
 
@@ -586,9 +587,8 @@ Normalization is the process of organizing data in a database to reduce redundan
     \label{tab:bcnf_compliance}
 \end{table}
 
-
 \subsection*{5. Final Product after Normalization (after Conclusion due to Latex)}
-\begin{table}[ht]
+\begin{table}[H]
     \centering
     \begin{tabularx}{\textwidth}{|X|X|X|}
         \hline
@@ -610,6 +610,12 @@ Normalization is the process of organizing data in a database to reduce redundan
         \hline
         Takes Table & \underline{Student ID} (Foreign Key), Course ID (Foreign Key), Semester, Year, Grade, Completion Status & None. \\
         \hline
+        \end{tabularx}
+ \end{table}
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|X|X|X|}
+        \hline
         Teaches Table & \underline{Instructor ID} (Foreign Key), Course ID (Foreign Key), Semester, Year, Primary Instructor & None. \\
         \hline
         Department Table & \underline{Department ID} (Primary Key), Department Name, Department Head & Created new Department Table to eliminate redundancy. \\
@@ -621,8 +627,6 @@ Normalization is the process of organizing data in a database to reduce redundan
 
 \subsection*{Conclusion}
 There were a few instances of overlooking while we were building out our tables in the first few weeks of the project. This is evident, for example, in the exclusion of a dedicated Department table that is present in the book. There were minor tweaks to our tables, however, for the most part - our baked-in normalization process when the group was developing tables stood strong. 
-
-\end{document}
 
 
 \end{document}
